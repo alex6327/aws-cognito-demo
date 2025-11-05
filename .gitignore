@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Terraform
+infra/.terraform/
+infra/terraform.tfstate
+infra/terraform.tfstate.*
+infra/lambda.zip
+
+# Local output / temp files
+output.json
+
+# macOS junk
+.DS_Store
+
+# VS Code settings (optional – keep if you don’t want to share settings)
+.vscode/

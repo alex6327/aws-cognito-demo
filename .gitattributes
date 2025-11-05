@@ -1,0 +1,21 @@
+# Default: text files get normalized to LF in the repo.
+# On Windows, Git will convert to CRLF on checkout if core.autocrlf=true.
+* text=auto
+
+# Explicitly ensure code files use LF in the repo
+*.py      text eol=lf
+*.tf      text eol=lf
+*.tfvars  text eol=lf
+*.sh      text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+*.md      text eol=lf
+
+# Windows-specific scripts can keep CRLF if you ever add them
+*.bat     text eol=crlf
+*.cmd     text eol=crlf
+
+# Binary files
+*.zip     binary
+*.png     binary
+*.jpg     binary

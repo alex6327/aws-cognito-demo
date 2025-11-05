@@ -1,0 +1,21 @@
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+# Directories to include/exclude
+src = ["src"]
+exclude = [
+  ".venv",
+  ".terraform",
+  "infra/.terraform",
+  "__pycache__",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]  # basic errors, flake8, import sorting
+ignore = []
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+line-ending = "lf"

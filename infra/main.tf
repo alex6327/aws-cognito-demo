@@ -79,7 +79,7 @@ resource "aws_lambda_function" "demo" {
 
   role    = aws_iam_role.lambda_role.arn
   runtime = "python3.13"
-  handler = "handler.lambda_handler"
+  handler = "auth.handler.lambda_handler"
 
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
@@ -107,10 +107,22 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
   payload_format_version = "2.0"
 }
 
-# Route: POST /auth -> Lambda
-resource "aws_apigatewayv2_route" "auth_route" {
+# Routes: POST /auth/signup, /auth/login, /auth/confirm -> Lambda
+resource "aws_apigatewayv2_route" "signup_route" {
   api_id    = aws_apigatewayv2_api.http_api.id
-  route_key = "POST /auth"
+  route_key = "POST /auth/signup"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+}
+
+resource "aws_apigatewayv2_route" "login_route" {
+  api_id    = aws_apigatewayv2_api.http_api.id
+  route_key = "POST /auth/login"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+}
+
+resource "aws_apigatewayv2_route" "confirm_route" {
+  api_id    = aws_apigatewayv2_api.http_api.id
+  route_key = "POST /auth/confirm"
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
 }
 

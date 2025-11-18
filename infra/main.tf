@@ -1,5 +1,12 @@
 terraform {
   required_version = ">= 1.6.0"
+  
+  backend "s3" {
+    bucket         = "daniel-tf-state-us-west-2"
+    key            = "aws-cognito-demo/infra/terraform.tfstate"
+    region         = "us-west-2"
+    encrypt        = true
+  }
 
   required_providers {
     aws = {
